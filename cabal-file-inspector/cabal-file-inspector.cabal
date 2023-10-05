@@ -1,0 +1,145 @@
+cabal-version: 3.0
+
+name: cabal-file-inspector
+version: 0.0.0.0
+
+extra-source-files:
+  test-data/*.cabal
+  *.md
+
+common containers
+  build-depends: containers
+  mixins:
+    , containers
+        ( Data.Map.Strict as Map
+        , Data.Set as Set
+        )
+
+common cabal
+  build-depends: Cabal ^>= 3.10
+  mixins:
+    , Cabal
+        ( Distribution.Compat.NonEmptySet as Cabal.NonEmptySet
+        , Distribution.PackageDescription.Configuration as Cabal.PackageDescription.Configuration
+        , Distribution.PackageDescription.Parsec as Cabal.PackageDescription.Parsec
+        , Distribution.Parsec.Error as Cabal.Parsec.Error
+        , Distribution.Parsec.Warning as Cabal.Parsec.Warning
+        , Distribution.Types.Benchmark as Cabal.Benchmark
+        , Distribution.Types.BuildInfo as Cabal.BuildInfo
+        , Distribution.Types.Component as Cabal.Component
+        , Distribution.Types.ComponentRequestedSpec as Cabal.ComponentRequestedSpec
+        , Distribution.Types.Dependency as Cabal.Dependency
+        , Distribution.Types.Executable as Cabal.Executable
+        , Distribution.Types.Flag as Cabal.Flag
+        , Distribution.Types.ForeignLib as Cabal.ForeignLib
+        , Distribution.Types.GenericPackageDescription as Cabal.GenericPackageDescription
+        , Distribution.Types.Library as Cabal.Library
+        , Distribution.Types.LibraryName as Cabal.LibraryName
+        , Distribution.Types.PackageDescription as Cabal.PackageDescription
+        , Distribution.Types.PackageId as Cabal.PackageId
+        , Distribution.Types.PackageName as Cabal.PackageName
+        , Distribution.Types.PackageVersionConstraint as Cabal.PackageVersionConstraint
+        , Distribution.Types.TestSuite as Cabal.TestSuite
+        , Distribution.Types.UnqualComponentName as Cabal.UnqualComponentName
+        , Distribution.Utils.ShortText as Cabal.ShortText
+        , Distribution.Compiler as Cabal.Compiler
+        , Distribution.System as Cabal.System
+        , Distribution.Version as Cabal.Version
+        )
+
+common base
+  import: containers
+  ghc-options: -Wall
+  default-language: GHC2021
+  default-extensions:
+      ApplicativeDo
+      BlockArguments
+      DataKinds
+      DeriveAnyClass
+      DerivingVia
+      DuplicateRecordFields
+      FunctionalDependencies
+      LambdaCase
+      NoFieldSelectors
+      NoImplicitPrelude
+      OverloadedLists
+      OverloadedRecordDot
+      OverloadedStrings
+      RecordWildCards
+      ViewPatterns
+  build-depends:
+    , base ^>= 4.17
+    , bytestring ^>= 0.11
+    , exceptions ^>= 0.10.7
+    , monad-validate ^>= 1.3
+    , quaalude ^>= 0.0
+    , text ^>= 2.0
+    , transformers
+
+common exe
+  build-depends:
+    , cabal-file-inspector
+    , directory ^>= 1.3.8
+    , file-io ^>= 0.1
+    , filepath ^>= 1.4.100
+    , optparse-applicative ^>= 0.18
+
+library
+  import: base, cabal
+  hs-source-dirs: lib
+  exposed-modules: CabalFile
+  other-modules:
+      Cabal.Optics
+      CabalFile.CabalFile
+      CabalFile.CabalOptic
+      CabalFile.Component
+      CabalFile.ComponentName
+      CabalFile.ComponentsByType
+      CabalFile.ComponentType
+      CabalFile.DependencyName
+      CabalFile.FlagName
+      CabalFile.Package
+      CabalFile.PackageName
+      CabalFile.QualifiedComponentName
+      CabalFile.Text
+      MonadicFlow
+  build-depends:
+    , optics ^>= 0.4
+
+library exe-lib
+  import: base, cabal, exe
+  hs-source-dirs: exe-lib
+  exposed-modules:
+      Exe.CabalFileSource
+      Exe.Command.Dependencies
+      Exe.Compiler
+      Exe.ComponentSpecification
+      Exe.Error
+      Exe.Flags
+      Exe.Input
+      Exe.Text
+
+executable cabal-file
+  import: base, exe
+  build-depends: exe-lib
+  hs-source-dirs: exe
+  main-is: Main.hs
+
+test-suite spec
+  import: base, cabal, exe
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Main.hs
+  default-extensions:
+      TemplateHaskell
+  other-modules:
+      Spec.CabalFile
+      Spec.Command.Dependencies
+      Testing.Optparse
+  build-depends:
+    , cabal-file-inspector
+    , exe-lib
+    , file-embed
+    , hspec
+    , hspec-core
+    , HUnit

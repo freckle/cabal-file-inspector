@@ -1,0 +1,25 @@
+cabal-version: 3.0
+name: apple
+version: 1.2.3.4
+
+library
+  hs-source-dirs: library
+  exposed-modules: Apple
+  build-depends: apple-internal, base
+
+library apple-internal
+  hs-source-dirs: a
+  exposed-modules: Apple.Internal
+  build-depends: text
+
+library internal-test-utilities
+  hs-source-dirs: b
+  exposed-modules: Apple.Test
+  build-depends: QuickCheck
+
+test-suite apple-test
+  type: exitcode-stdio-1.0
+  build-depends: apple, internal-test-utilities, hspec
+  hs-source-dirs: test
+  main-is: Main.hs
+  other-modules: Apple.Spec

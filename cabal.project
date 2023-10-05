@@ -1,0 +1,4 @@
+packages: cabal-file-inspector
+
+package *
+  ghc-options: -fwrite-ide-info

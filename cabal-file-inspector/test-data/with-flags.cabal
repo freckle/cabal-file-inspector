@@ -1,0 +1,22 @@
+cabal-version: 3.0
+name: apple
+version: 1.2.3.4
+
+flag use-optics
+  description: Use the @optics@ library.
+  default: True
+  manual: True
+
+flag use-lens
+  description: Use the @lens@ library.
+  default: False
+  manual: True
+
+library
+  hs-source-dirs: library
+  build-depends: base
+  exposed-modules: Apple
+  if flag(use-optics)
+    build-depends: optics ^>= 0.4
+  if flag(use-lens)
+    build-depends: lens ^>= 5.2
