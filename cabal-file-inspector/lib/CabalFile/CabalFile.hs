@@ -38,8 +38,8 @@ import Data.Either qualified as Either
 import Data.List.NonEmpty (NonEmpty, nonEmpty)
 import Data.String (IsString)
 import Data.String qualified as IsString (IsString (..))
-import Data.Text qualified as Text.Strict
-import Data.Text.Encoding qualified as Text.Strict
+import Data.Text qualified as T.Strict
+import Data.Text.Encoding qualified as T.Strict
 import Essentials
 import GHC.Stack (HasCallStack, callStack, prettyCallStack)
 import Map (Map)

@@ -10,7 +10,7 @@ import CabalFile
 import Control.Monad.Trans.Class (lift)
 import Control.Monad.Validate
 import Data.List.NonEmpty (NonEmpty)
-import Data.Text qualified as Text
+import Data.Text qualified as T
 import Essentials
 import Exe.Error
 import Exe.Input

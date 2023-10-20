@@ -6,8 +6,8 @@ where
 import Cabal.Compiler
 import Cabal.Version
 import Data.Text (Text)
-import Data.Text qualified as Text
-import Data.Text.Read qualified as Text
+import Data.Text qualified as T
+import Data.Text.Read qualified as T
 import Essentials
 import Exe.Text
 import Options.Applicative

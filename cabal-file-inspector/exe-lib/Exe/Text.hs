@@ -1,8 +1,8 @@
 module Exe.Text where
 
 import Data.Text (Text)
-import Data.Text qualified as Text
-import Data.Text.Read qualified as Text
+import Data.Text qualified as T
+import Data.Text.Read qualified as T
 import Essentials
 import Prelude (Char, const, either)
 

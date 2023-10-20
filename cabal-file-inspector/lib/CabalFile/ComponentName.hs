@@ -5,7 +5,7 @@ import Cabal.UnqualComponentName qualified as Cabal (UnqualComponentName)
 import CabalFile.CabalOptic
 import CabalFile.Text
 import Data.String (IsString)
-import Data.Text qualified as Text
+import Data.Text qualified as T
 import Essentials
 import Optics (An_Iso, coerced, iso, (%))
 

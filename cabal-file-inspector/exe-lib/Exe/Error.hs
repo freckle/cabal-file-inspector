@@ -2,7 +2,7 @@ module Exe.Error where
 
 import Data.List.NonEmpty (NonEmpty)
 import Data.Text (Text)
-import Data.Text.IO qualified as Text
+import Data.Text.IO qualified as T
 import Essentials
 import System.Exit (exitFailure)
 import System.IO (stderr)

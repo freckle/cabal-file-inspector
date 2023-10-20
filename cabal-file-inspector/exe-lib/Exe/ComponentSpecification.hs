@@ -15,7 +15,7 @@ import Data.Function (flip)
 import Data.List (elem, filter)
 import Data.List.NonEmpty (NonEmpty, nonEmpty)
 import Data.Text (Text)
-import Data.Text qualified as Text
+import Data.Text qualified as T
 import Essentials
 import Exe.Error
 import Exe.Text

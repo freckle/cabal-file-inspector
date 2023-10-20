@@ -28,7 +28,7 @@ import Control.Monad.Validate
 import Data.Foldable (fold)
 import Data.List.NonEmpty (NonEmpty)
 import Data.Maybe (fromMaybe)
-import Data.Text.IO qualified as Text
+import Data.Text.IO qualified as T
 import Essentials
 import Exe.CabalFileSource
 import Exe.Compiler

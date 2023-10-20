@@ -2,7 +2,7 @@ module Exe.Input where
 
 import Data.ByteString (ByteString, hGetContents)
 import Data.Text (Text)
-import Data.Text qualified as Text
+import Data.Text qualified as T
 import Essentials
 import System.Directory.OsPath (doesFileExist)
 import System.File.OsPath qualified as IO
