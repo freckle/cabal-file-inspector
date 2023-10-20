@@ -33,13 +33,13 @@ import CabalFile.Package
 import CabalFile.PackageName
 import Control.Exception (Exception)
 import Control.Monad.Validate
-import Data.ByteString qualified as ByteString.Strict
+import Data.ByteString qualified as BS
 import Data.Either qualified as Either
 import Data.List.NonEmpty (NonEmpty, nonEmpty)
 import Data.String (IsString)
 import Data.String qualified as IsString (IsString (..))
-import Data.Text qualified as T.Strict
-import Data.Text.Encoding qualified as T.Strict
+import Data.Text qualified as T
+import Data.Text.Encoding qualified as T
 import Essentials
 import GHC.Stack (HasCallStack, callStack, prettyCallStack)
 import Map (Map)
@@ -104,15 +104,15 @@ instance Show e => Show (CabalReadException e) where
 -- | Parses like the contents of a .cabal file. Ignores warnings. Bottom if parsing fails.
 instance IsString CabalFile where
   fromString =
-    T.Strict.pack
-      >>> T.Strict.encodeUtf8
+    T.pack
+      >>> T.encodeUtf8
       >>> parseCabalFile
       >>> (.result)
       >>> either (error . show) id
 
 -- | Interpret a byte string as a .cabal file, hopefully generating a 'CabalFile',
 --   possibly generating warnings and errors
-parseCabalFile :: ByteString.Strict.ByteString -> CabalRead CabalFile
+parseCabalFile :: BS.ByteString -> CabalRead CabalFile
 parseCabalFile =
   Cabal.Parsec.parseGenericPackageDescription
     >>> Cabal.Parsec.runParseResult

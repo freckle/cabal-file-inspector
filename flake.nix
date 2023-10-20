@@ -27,6 +27,7 @@
             nixpkgs-unstable.haskell-language-server
             nixpkgs-unstable.haskellPackages.weeder
             freckle.fourmolu-0-13-x
+            nixpkgs-stable.hlint
           ];
         };
       }
