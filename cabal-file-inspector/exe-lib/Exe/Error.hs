@@ -13,4 +13,4 @@ newtype Error = Error {text :: Text}
 
 -- | Print error texts one-per-line on the standard error stream, then exit with a failure code
 errorQuit :: NonEmpty Error -> IO a
-errorQuit xs = traverse_ (Text.hPutStrLn stderr) ((.text) <$> xs) *> exitFailure
+errorQuit xs = traverse_ (T.hPutStrLn stderr) ((.text) <$> xs) *> exitFailure

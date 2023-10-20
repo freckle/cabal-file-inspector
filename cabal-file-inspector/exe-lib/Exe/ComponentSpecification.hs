@@ -47,16 +47,16 @@ data ComponentSetSpecification = ComponentSetSpecification
 
 -- | Prints a component in the same format that 'componentsReader' reads
 showComponent :: QualifiedComponentName -> Text
-showComponent (t :/ n) = Text.concat [componentTypeName t, ":", toText n]
+showComponent (t :/ n) = T.concat [componentTypeName t, ":", toText n]
 
 -- | Optparse reader in the form "(lib|flib|test|exe|bench):component-name"
 componentsReader :: ReadM (Set QualifiedComponentName)
-componentsReader = maybeReader $ componentSetFromText . Text.pack
+componentsReader = maybeReader $ componentSetFromText . T.pack
 
 componentSetFromText :: Text -> Maybe (Set QualifiedComponentName)
 componentSetFromText =
-  Text.split (flip (elem @[]) " ,")
-    >>> filter (not . Text.null)
+  T.split (flip (elem @[]) " ,")
+    >>> filter (not . T.null)
     >>> traverse componentFromText
     >>> fmap Set.fromList
 
@@ -113,7 +113,7 @@ resolveComponentSet setSpec package =
 missingComponentsError :: NonEmpty QualifiedComponentName -> Error
 missingComponentsError missing =
   Error $
-    Text.concat
+    T.concat
       [ "Missing components: "
-      , Text.intercalate ", " (showComponent <$> toList missing)
+      , T.intercalate ", " (showComponent <$> toList missing)
       ]

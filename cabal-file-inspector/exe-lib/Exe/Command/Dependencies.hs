@@ -149,4 +149,4 @@ getPackage i opt =
         )
 
 printDependencies :: Set PackageName -> IO ()
-printDependencies = traverse_ (Text.putStrLn . CabalFile.toText)
+printDependencies = traverse_ (T.putStrLn . CabalFile.toText)

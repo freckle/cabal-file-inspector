@@ -19,4 +19,4 @@ instance CabalOptic An_Iso FlagName FlagName Cabal.FlagName Cabal.FlagName where
 instance IsText FlagName where
   string = cabal % Cabal.Optics.flagName_string
   shortText = string % iso Cabal.ShortText.toShortText Cabal.ShortText.fromShortText
-  text = string % iso Text.pack Text.unpack
+  text = string % iso T.pack T.unpack

@@ -31,17 +31,17 @@ data CabalFileSource fp
 showCabalFileSource :: CabalFileSource fp -> String
 showCabalFileSource = \case
   StandardInputCabalFile -> "<stdin>"
-  CabalFilePath x -> Text.unpack x.text
+  CabalFilePath x -> T.unpack x.text
 
 -- | Optparse reader for a file path
 --
 -- This is parameterized on the 'Input' because different systems can have different
 -- rules for what constitutes a valid file path.
 filePathReader :: Input fp m -> ReadM (FilePath fp)
-filePathReader i = maybeReader \s -> let t = Text.pack s in FilePath t <$> i.textFilePath t
+filePathReader i = maybeReader \s -> let t = T.pack s in FilePath t <$> i.textFilePath t
 
 cabalParseError :: CabalFileSource fp -> PError -> Error
-cabalParseError cabalFileSource = Error . Text.pack . showPError (showCabalFileSource cabalFileSource)
+cabalParseError cabalFileSource = Error . T.pack . showPError (showCabalFileSource cabalFileSource)
 
 -- | Fetch the bytes of .cabal file, and parse
 --

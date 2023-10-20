@@ -40,7 +40,7 @@ data Input fp m = Input
 regularInput :: Input OsPath IO
 regularInput =
   Input
-    { textFilePath = Text.unpack >>> OsPath.encodeUtf
+    { textFilePath = T.unpack >>> OsPath.encodeUtf
     , readStandardInput = hGetContents stdin
     , readFile = IO.readFile'
     , doesFileExist = doesFileExist

@@ -24,4 +24,4 @@ instance CabalOptic An_Iso PackageName PackageName Cabal.PackageName Cabal.Packa
 instance IsText PackageName where
   string = cabal % Cabal.Optics.packageName_string
   shortText = cabal % Cabal.Optics.packageName_shortText
-  text = string % iso Text.pack Text.unpack
+  text = string % iso T.pack T.unpack

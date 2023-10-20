@@ -13,13 +13,13 @@ import Prelude (Char, const, either)
 -- Fails if no character in the input text satisfies the predicate.
 splitIn2 :: (Char -> Bool) -> Text -> Maybe (Text, Text)
 splitIn2 f =
-  Text.break f >>> \(x, y) ->
-    if Text.null y then Nothing else Just (x, Text.drop 1 y)
+  T.break f >>> \(x, y) ->
+    if T.null y then Nothing else Just (x, T.drop 1 y)
 
--- | Run a 'Text.Reader', requiring that it read the entire input, discarding error information
-textReadOnly :: Text.Reader a -> Text -> Maybe a
+-- | Run a 'T.Reader', requiring that it read the entire input, discarding error information
+textReadOnly :: T.Reader a -> Text -> Maybe a
 textReadOnly r t =
   r t
     & either
       (const Nothing)
-      (\(i, remainder) -> if Text.null remainder then Just i else Nothing)
+      (\(i, remainder) -> if T.null remainder then Just i else Nothing)

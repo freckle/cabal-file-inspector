@@ -17,17 +17,17 @@ import Prelude (Char)
 --
 -- "+flagname" set a flag to True; "-flagname" sets it to false.
 flagsReader :: ReadM (Map FlagName Bool)
-flagsReader = maybeReader $ flagMapFromText . Text.pack
+flagsReader = maybeReader $ flagMapFromText . T.pack
 
 flagMapFromText :: Text -> Maybe (Map FlagName Bool)
 flagMapFromText =
-  Text.split (flip (elem @[]) " ,")
+  T.split (flip (elem @[]) " ,")
     >>> traverse flagFromText
     >>> fmap Map.fromList
 
 flagFromText :: Text -> Maybe (FlagName, Bool)
 flagFromText a = do
-  (x, y) <- Text.uncons a
+  (x, y) <- T.uncons a
   s <- boolFromFlagChar x
   Just (fromText y, s)
 

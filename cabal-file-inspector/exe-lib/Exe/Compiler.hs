@@ -18,7 +18,7 @@ import Prelude (Int)
 -- This matters because a .cabal file can include conditionals based on information
 -- about the compiler.
 compilerReader :: ReadM CompilerId
-compilerReader = maybeReader $ compilerFromText . Text.pack
+compilerReader = maybeReader $ compilerFromText . T.pack
 
 compilerFromText :: Text -> Maybe CompilerId
 compilerFromText s =
@@ -29,10 +29,10 @@ compilerFromText s =
         versionFromText versionText <&> CompilerId (compilerFlavorFromText flavorText)
 
 compilerFlavorFromText :: Text -> CompilerFlavor
-compilerFlavorFromText = Text.unpack >>> classifyCompilerFlavor
+compilerFlavorFromText = T.unpack >>> classifyCompilerFlavor
 
 versionFromText :: Text -> Maybe Version
-versionFromText = Text.split (== '.') >>> traverse versionPartFromText >>> fmap mkVersion
+versionFromText = T.split (== '.') >>> traverse versionPartFromText >>> fmap mkVersion
 
 versionPartFromText :: Text -> Maybe Int
-versionPartFromText = textReadOnly Text.decimal
+versionPartFromText = textReadOnly T.decimal

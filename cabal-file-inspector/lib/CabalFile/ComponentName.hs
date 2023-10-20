@@ -31,4 +31,4 @@ instance
 instance IsText ComponentName where
   string = cabal % Cabal.Optics.componentName_string
   shortText = cabal % Cabal.Optics.componentName_shortText
-  text = string % iso Text.pack Text.unpack
+  text = string % iso T.pack T.unpack

@@ -104,8 +104,8 @@ instance Show e => Show (CabalReadException e) where
 -- | Parses like the contents of a .cabal file. Ignores warnings. Bottom if parsing fails.
 instance IsString CabalFile where
   fromString =
-    Text.Strict.pack
-      >>> Text.Strict.encodeUtf8
+    T.Strict.pack
+      >>> T.Strict.encodeUtf8
       >>> parseCabalFile
       >>> (.result)
       >>> either (error . show) id
