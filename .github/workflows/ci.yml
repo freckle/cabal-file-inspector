@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: freckle/stack-cache-action@v2
-      - uses: freckle/stack-action@v3
+      - uses: freckle/stack-action@v5
       - uses: freckle/weeder-action@v1
 
   lint:
